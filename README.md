@@ -1,4 +1,4 @@
-# Ruler - 轻量高效的 Rust 规则引擎
+# Siamese - 轻量高效的 Rust 规则引擎
 
 ![License](https://img.shields.io/badge/license-MIT%202.0-green)
 ![Status](https://img.shields.io/badge/status-alpha-orange)
@@ -73,23 +73,6 @@ fn main() {
 }
 ```
 
-## 核心特性
-
-### 1. 灵活的条件系统
-
-```rust
-// 复杂条件示例
-Condition::And(vec![
-    Condition::GreaterThan { field: "amount".into(), value: 5000.into() },
-    Condition::Or(vec![
-        Condition::Equals { field: "user_level".into(), value: "VIP".into() },
-        Condition::Not(Box::new(
-            Condition::Equals { field: "country".into(), value: "restricted".into() }
-        ))
-    ])
-])
-```
-
 支持的条件类型：
 - `Equals` (等于)
 - `GreaterThan` (大于)
@@ -107,56 +90,6 @@ Condition::And(vec![
 | `UpdateField` | 更新字段 | `Action::UpdateField { field: "status", value: "approved" }` |
 | `CallExternalService` | 调用外部服务 | `Action::CallExternalService { endpoint: "/api/verify", ... }` |
 | `Composite` | 组合多个动作 | `Action::Composite(vec![action1, action2])` |
-
-### 3. 规则优先级控制
-
-```rust
-RuleBuilder::new("high_priority", "重要规则")
-    .priority(200) // 0-255，值越大优先级越高
-    // ...
-```
-
-## 使用示例
-
-### 电商促销场景
-
-```rust
-// 黑五促销规则
-let black_friday_rule = RuleBuilder::new("black_friday", "黑五促销")
-    .condition(Condition::Equals { 
-        field: "campaign".into(), 
-        value: Value::String("black_friday".into()) 
-    })
-    .action(Action::UpdateField { 
-        field: "discount".into(), 
-        value: Value::Float(0.3) 
-    })
-    .build();
-
-engine.add_rule(black_friday_rule);
-```
-
-### 用户权限检查
-
-```rust
-// 管理员权限规则
-let admin_rule = RuleBuilder::new("admin_access", "管理员权限")
-    .condition(Condition::And(vec![
-        Condition::Equals { 
-            field: "role".into(), 
-            value: Value::String("admin".into()) 
-        },
-        Condition::Equals { 
-            field: "mfa_enabled".into(), 
-            value: Value::Bool(true) 
-        }
-    ]))
-    .action(Action::UpdateField { 
-        field: "access_level".into(), 
-        value: Value::String("full".into()) 
-    })
-    .build();
-```
 
 ## 路线图
 
