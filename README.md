@@ -1,6 +1,6 @@
 # Siamese - 轻量高效的 Rust 规则引擎
 
-![License](https://img.shields.io/badge/license-MIT%202.0-green)
+![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-alpha-orange)
 
 Ruler 是一个用 Rust 构建的高性能规则引擎，专为需要灵活业务逻辑的应用程序设计。它轻量、快速且易于集成，是初创项目和微服务的理想选择。
